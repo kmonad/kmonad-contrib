@@ -1,0 +1,85 @@
+;; Copyright 2021 Manna Harbour
+;; github.com/manna-harbour/miryoku
+
+(defcfg
+  input  (device-file "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd")
+  ;;input  (device-file "/dev/input/by-id/usb-Microsoft_Wired_Keyboard_600-event-kbd")
+  output (uinput-sink "Miryoku KMonad output")
+  fallthrough false
+)
+(defsrc
+  grv  2 3 4 5    8 9 0 -    bspc
+  tab  q w e r    i o p [    ]
+  caps a s d f    k l ; apos \
+         z x c    m , .
+)
+(defalias
+  bmed (tap-hold-next-release 200 bspc (layer-toggle MEDIA)) 
+  enav (tap-hold-next-release 200 spc (layer-toggle NAV))  
+  tmou (tap-hold-next-release 200 tab (layer-toggle MOUSE))
+  esym (tap-hold-next-release 200 ent bspc)
+  snum (tap-hold-next-release 200 spc (layer-toggle NUM))
+  dfun (tap-hold-next-release 200 del (layer-toggle FUN))
+)
+
+(deflayer BASE
+(tap-hold-next-release 200 q esc)  w e r t y (tap-hold-next-release 200 u #(' spc)) (tap-hold-next-release 200 i #(" spc)) o p
+(tap-hold-next-release 200 a met) (tap-hold-next-release 200 s alt) (tap-hold-next-release 200 d ctl) (tap-hold-next-release 200 f sft) g 
+   h (tap-hold-next-release 200 j sft) (tap-hold-next-release 200 k ctl) (tap-hold-next-release 200 l alt) (tap-hold-next-release 200 ~ met)
+
+(tap-hold-next-release 200 z (layer-toggle BUTTON))  x  c v b
+   n m , (tap-hold-next-release 200 . ralt)  (tap-hold-next-release 200 / ;)
+   @bmed @enav @tmou     @esym @snum @dfun
+)
+
+(deflayer NAV
+  XX  #(C-a p)  C-S-pgup  C-S-pgdn  #(C-a n)    #(S-6 spc) #(' spc) #(" spc) S-4 %
+
+  (tap-hold-next-release 200 a met) (tap-hold-next-release 200 s alt) (tap-hold-next-release 200 d ctl) (tap-hold-next-release 200 f sft) [
+  left  down  up    right (tap-hold-next-release 200 ] S-0)
+
+  XX  #(C-a \()  C-pgup  C-pgdn  #(C-a \))    home  pgdn  pgup  end   (tap-hold-next-release 200 / %)
+   @bmed @enav @tmou     @esym @snum @dfun
+)
+
+(deflayer NUM
+  (tap-hold-next-release 200 apos #(" spc)) { [ \( !    (tap-hold-next-release 200 +` S-6) 7 8 9    (tap-hold-next-release 200 - S--)
+
+  (tap-hold-next-release 200 / met) (tap-hold-next-release 200 S-8 alt) (tap-hold-next-release 200 - ctl) (tap-hold-next-release 200 + sft) (tap-hold-next-release 200 = :)
+  +' 4 5 6 +
+
+  \\ } ] \) &    0 1 2 3    (tap-hold-next-release 200 , .)
+   @bmed @enav @tmou     @esym @snum @dfun
+)
+
+(deflayer FUN
+XX XX  XX  XX     XX       f12 f7  f8  f9 ins
+XX XX  XX  XX     XX       f11 f4  f5  f6 XX
+XX XX  XX  S-ins  XX       f10 f1  f2  f3 XX
+   @bmed @enav @tmou     @esym @snum @dfun
+)
+
+(deflayer BUTTON
+undo  S-del C-ins S-ins again again S-ins C-ins S-del undo
+met alt ctl sft XX  XX  sft ctl alt met
+undo  S-del C-ins S-ins again again S-ins C-ins S-del undo
+#(kp- kp5)  #(kp* kp5)  #(kp/ kp5)  #(kp/ kp5)  #(kp* kp5)  #(kp- kp5)
+)
+
+(deflayer MOUSE
+XX  XX  XX  XX  XX  again S-ins C-ins S-del undo
+met alt ctl sft XX  XX  kp4 kp2 kp8 kp6
+XX  ralt  XX  XX  XX  XX  XX  XX  XX  XX
+XX  XX  XX  #(kp/ kp5)  #(kp* kp5)  #(kp- kp5)
+)
+(deflayer MEDIA
+XX  XX  XX  XX  XX  XX  XX  XX  XX  XX
+met alt ctl sft XX  XX  previoussong  vold  volu  nextsong
+XX  ralt  XX  XX  XX  XX  XX  XX  XX  XX
+XX  XX  XX  stopcd  playpause mute
+)
+(deflayer SYM
+{ & * + } XX  XX  XX  XX  XX
+^ % / ~ $ XX  sft ctl alt met
+: ! @ # | XX  XX  XX  ralt  XX
+\(  \_  \)  XX  XX  XX)
