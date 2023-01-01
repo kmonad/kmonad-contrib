@@ -1,5 +1,5 @@
 (defcfg
-    input (device-file "/dev/input/by-id/usb-Razer_Razer_Tartarus_V2-if01-event-kbd")
+    input (device-file "/dev/input/by-id/usb-Razer_Razer_Tartarus_V2-event-kbd")
     output (uinput-sink "Tartarus V2 Layers")
 
     allow-cmd true
