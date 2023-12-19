@@ -1,0 +1,72 @@
+;; Kmonad configuration for Portuguese Brazilian ABNT2 with deadkeys
+
+;; Important: in order to this config to work, your system layout 
+;; needs to be configured as ABNT2. This way you can use Kmonad and
+;; the deadkeys will work as expected.
+
+;; Basic configuration.
+(defcfg
+  input  (device-file "/dev/input/...") ;; adjust for your device
+  output (uinput-sink "my conf")
+  fallthrough true
+  allow-cmd false
+  cmp-seq RightAlt
+)
+
+;; Layout us-ansi (indicates as as kmonad sees keycodes).
+;; Note: if you change the location of a key, remember to adjust layer base
+;; accordingly
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    ret
+  caps a    s    d    f    g    h    j    k    l    ;    '    \
+  lsft z    x    c    v    b    n    m    ,    .    /    ro   102nd rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+;; Mapping us-ansi -> abnt2.
+(defalias 
+  ç    ;
+  '    grv
+  ´    [
+  [    ]
+  ~    '
+  ]    \
+  ;    /
+  /    ro
+  \    102nd
+)
+;; In case you need direct access to keys without using shift.
+(defalias 
+  Ç    S-;
+  ''   S-grv
+  `    S-[
+  {    S-]
+  ^    S-'
+  }    S-\
+  :    S-/
+  ?    S-ro
+  |    S-102nd
+)
+;; In case you want diacritics without the deadkey behaviour.
+(defalias 
+  s'   #(spc grv)
+  s´   #(spc [)
+  s~   #(spc ')
+  s''  #(spc S-grv)
+  s`   #(spc S-[)
+  s^   #(spc S-')
+)
+
+;; Layer for Brazilian Portuguese ABNT2.
+;; Remember to configure your system to use ABNT2 and to keep the layout 
+;; synchronized with defsrc section
+(deflayer base
+  @'   1    2    3    4    5    6    7    8    9    0    -    =     bspc
+  tab  q    w    e    r    t    y    u    i    o    p    @´   @[    ret
+  caps a    s    d    f    g    h    j    k    l    @ç   @~   @]
+  lsft z    x    c    v    b    n    m    ,    .    @;   @/   @\    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+;; your customizations here
