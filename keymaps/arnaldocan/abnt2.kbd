@@ -13,14 +13,14 @@
   cmp-seq RightAlt
 )
 
-;; Layout us-ansi (indicates as as kmonad sees keycodes).
+;; Layout us-ansi (indicates as kmonad sees keycodes).
 ;; Note: if you change the location of a key, remember to adjust layer base
 ;; accordingly
 (defsrc
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    ret
   caps a    s    d    f    g    h    j    k    l    ;    '    \
-  lsft z    x    c    v    b    n    m    ,    .    /    ro   102nd rsft
+  lsft z    x    c    v    b    n    m    ,    .    /    ro   nubs rsft
   lctl lmet lalt           spc            ralt rmet cmp  rctl
 )
 
@@ -34,7 +34,7 @@
   ]    \
   ;    /
   /    ro
-  \    102nd
+  \    nubs
 )
 ;; In case you need direct access to keys without using shift.
 (defalias 
@@ -46,16 +46,16 @@
   }    S-\
   :    S-/
   ?    S-ro
-  |    S-102nd
+  |    S-nubs
 )
 ;; In case you want diacritics without the deadkey behaviour.
 (defalias 
-  s'   #(spc grv)
-  s´   #(spc [)
-  s~   #(spc ')
-  s''  #(spc S-grv)
-  s`   #(spc S-[)
-  s^   #(spc S-')
+  s'   #(grv)
+  s´   #([ [)
+  s~   #(' spc)
+  s''  #(S-grv spc)
+  s`   #(S-[ spc)
+  s^   #(S-' spc)
 )
 
 ;; Layer for Brazilian Portuguese ABNT2.
