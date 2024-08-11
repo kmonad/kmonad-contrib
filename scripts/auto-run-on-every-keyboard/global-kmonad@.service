@@ -1,0 +1,8 @@
+[Unit]
+Description=KMonad configuration using /etc/kmonad/personal.kbd
+DefaultDependencies=no
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/kmonad -i 'device-file "%I"' %E/kmonad/personal.kbd
+Nice=-20

@@ -1,0 +1,17 @@
+ACTION!="add", GOTO="kmonad_end"
+KERNEL!="event[0-9]*", GOTO="kmonad_end"
+SUBSYSTEM!="input", GOTO="kmonad_end"
+
+PROGRAM+="/usr/bin/systemd-escape -p '$devnode'"
+
+DRIVERS=="atkbd", \
+TAG+="systemd", \
+ENV{SYSTEMD_WANTS}+="global-kmonad@$result.service"
+
+ATTRS{bInterfaceClass}=="03", \
+ATTRS{bInterfaceSubClass}=="01", \
+ATTRS{bInterfaceProtocol}=="01", \
+TAG+="systemd", \
+ENV{SYSTEMD_WANTS}+="global-kmonad@$result.service"
+
+LABEL="kmonad_end"
