@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+build() {
+	# HACK: `add_file` instead of `add_systemd_unit` since it doesn't look in `/etc`
+	add_file '/etc/systemd/system/global-kmonad@.service'
+	add_udev_rule '/etc/udev/rules.d/70-kmonad.rules'
+	add_module 'uinput'
+	add_file '/etc/kmonad/personal.kbd'
+	add_binary '/usr/bin/kmonad'
+	add_binary '/usr/bin/systemd-escape'
+}
+
+help() {
+	cat <<HELPEOF
+This hook allows using KMonad configurations with systemd initramfs.
+Mostly useful in combination with `sd-encrypt`.
+The KMonad configuration `/etc/kmonad/personal.kbd` gets applied to every keyboard.
+HELPEOF
+}
