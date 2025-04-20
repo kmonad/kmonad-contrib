@@ -1,0 +1,90 @@
+;; Missing featurest;
+;; - nuhs (nubs is defined)
+;; - caps_word
+;; - Mouse movements
+
+(defcfg
+ ;; Linux
+ input (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+ output (uinput-sink "KMonad output")
+
+ fallthrough true)
+
+(defsrc
+ tab  q w e r t y u i o p [ ]    ret
+ caps a s d f g h j k l ; ' \
+ lsft nubs z x c v b n m , . / rsft
+ lctl lmet lalt spc ralt rctl)
+
+(defalias
+  ;; Layers
+  tgnav (layer-toggle nav)
+  tonav (layer-add nav)
+  rmnav (layer-rem nav)
+  tgnum (layer-toggle num)
+  tonum (layer-add num)
+  rmnum (layer-rem num)
+  tglwr (layer-toggle lower)
+  tgrse (layer-toggle raise)
+  tgaud (layer-toggle audio)
+  tgadj (layer-toggle adjust)
+  ;; Keys
+  ;; Homerow modifiers
+  almet (tap-hold-next 200 a lmet)
+  rlalt (tap-hold-next 200 r lalt)
+  slctl (tap-hold-next 200 s lctl)
+  tlsft (tap-hold-next 200 t lsft)
+  nrsft (tap-hold-next 200 n rsft)
+  erctl (tap-hold-next 200 e rctl)
+  ilalt (tap-hold-next 200 i lalt)
+  olgui (tap-hold-next 200 o lmet)
+  daltg (tap-hold-next 200 d ralt)
+  haltg (tap-hold-next 200 h ralt)
+  ;; Layer keys
+  znav  (tap-hold-next 200 z @tgnav)
+  slaud (tap-hold-next 200 / @tgaud)
+  tablwr (tap-hold-next 200 tab @tglwr)
+  escrse (tap-hold-next 200 esc @tgrse))
+
+(deflayer colemak
+	  tab  q      w      f       p     b j    l      u      y      ;      [      ]    ret
+	  lctl @almet @rlalt @slctl @tlsft g m    @nrsft @erctl @ilalt @olgui '      \
+	  lsft @znav  x      c      @daltg v bspc k      @haltg ,      .      @slaud rsft
+	                  caps lmet  @tablwr spc @escrse rctl)
+
+(deflayer lower
+	  _    grv  @ [  ]  %  ^   & |  \  ~     _      _ _
+	  _    esc  ! \( \) '  *   - =  \  |     _      _
+	  _    caps $ [  ]  " del # \_ +  nubs  S-nubs _
+	  _ _  @tglwr _ @tgadj _)
+	  
+(deflayer raise
+	  _ f1  f2  f3  f4 f5   f6   f7   f8 f9     f10    _    _ _
+	  _ 9   7   3   1  home pgup 0    2  6      8      _    _
+	  _ f11 f12 ins 5  end  _    pgdn 4  @tonav @tonum ssrq _ 
+	  _ _ @tgadj ret @tgrse _)
+
+(deflayer adjust
+	  _ _      _ _ _ _       _ _ _ _ _ _ _ _
+	  _ A-ssrq _ _ _ _       _ _ _ _ _ _ _
+	  _ _      _ _ _ _  ins  _ _ _ _ _ _
+	  _ _ @tgadj ssrq @tgadj _ )
+
+(deflayer audio
+	  _ _ _ _ _ _     _                _    _    _      _ _ _ _
+          _ _ _ _ _ _     _ mininteresting vold volu _      _ _
+	  _ _ _ _ _ _  _  _ pp             prev next @tgaud _ 
+	       _ _ _ _ _ _)
+
+(deflayer nav
+	  _ _       _   _    _    _        _   _    _    _    _     _ _ _
+          _ _       _   _    _    _        _   left down up   right _ _
+	  _ @tgnav lalt lctl lsft lmet  _  tab home pgup pgdn end   _
+	         _ _ _ _ @rmnav _)
+
+(deflayer num
+	  _ nlck home up   end  pgup       =   kp7 kp8 kp9 kprt _ _ _
+          _ _    left down rght pgdn       kp. kp4 kp5 kp6 tab  _ _ 
+	  _ kp/  kp*  kp-  kp+ ,     bspc  kp0 kp1 kp2 kp3 del  _ 
+	       _ _ _ _ @rmnum _)
+
