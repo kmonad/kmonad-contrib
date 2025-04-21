@@ -16,7 +16,6 @@ This is a laptop keyboard used with the HP Zbook laptop with an ISO keyboard. It
 
 There are still a few things that I want to see if I can implement in the keymap:
 - Caps word: Pressing both shifts will capitalize the next word
-- Fine-tune the tap-hold function so it is similar to my other keyboards
 - Mouse keys and movements 
 - Add nuhs-key to keymap. Currently, only mubs is defined
 
