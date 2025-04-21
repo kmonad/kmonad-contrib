@@ -16,6 +16,7 @@
  lsft nubs z x c v b n m , . / rsft
  lctl lmet lalt spc ralt rctl)
 
+
 (defalias
   ;; Layers
   tgnav (layer-toggle nav)
@@ -30,21 +31,21 @@
   tgadj (layer-toggle adjust)
   ;; Keys
   ;; Homerow modifiers
-  almet (tap-hold-next 200 a lmet)
-  rlalt (tap-hold-next 200 r lalt)
-  slctl (tap-hold-next 200 s lctl)
-  tlsft (tap-hold-next 200 t lsft)
-  nrsft (tap-hold-next 200 n rsft)
-  erctl (tap-hold-next 200 e rctl)
-  ilalt (tap-hold-next 200 i lalt)
-  olgui (tap-hold-next 200 o lmet)
-  daltg (tap-hold-next 200 d ralt)
-  haltg (tap-hold-next 200 h ralt)
+  almet (tap-hold-next-release 200 a lmet)
+  rlalt (tap-hold-next-release 200 r lalt)
+  slctl (tap-hold-next-release 200 s lctl)
+  tlsft (tap-hold-next-release 200 t lsft)
+  nrsft (tap-hold-next-release 200 n rsft)
+  erctl (tap-hold-next-release 200 e rctl)
+  ilalt (tap-hold-next-release 200 i lalt)
+  olgui (tap-hold-next-release 200 o lmet)
+  daltg (tap-hold-next-release 200 d ralt)
+  haltg (tap-hold-next-release 200 h ralt)
   ;; Layer keys
-  znav  (tap-hold-next 200 z @tgnav)
-  slaud (tap-hold-next 200 / @tgaud)
-  tablwr (tap-hold-next 200 tab @tglwr)
-  escrse (tap-hold-next 200 esc @tgrse))
+  znav  (tap-hold-next-release 200 z @tgnav)
+  slaud (tap-hold-next-release 200 / @tgaud)
+  tablwr (tap-hold-next-release 200 tab @tglwr)
+  escrse (tap-hold-next-release 200 esc @tgrse))
 
 (deflayer colemak
 	  tab  q      w      f       p     b j    l      u      y      ;      [      ]    ret
