@@ -15,9 +15,9 @@ This is a laptop keyboard used with the HP Zbook laptop with an ISO keyboard. It
 # TODO
 
 There are still a few things that I want to see if I can implement in the keymap:
-- Caps word: Pressing both shifts will capitalize the next word
-- Mouse keys and movements 
-- Add nuhs-key to keymap. Currently, only mubs is defined
+- Caps word: Pressing both shifts will capitalize the next word.
+- Mouse keys and movements.
+- Add the key nuhs to keymap. (Non-US Hash) Currently, only nubs (Non-US Backslash) seems to be defined in the source.
 
 Some is only keymap tweask, but others might require a patch to KMonad.
 
