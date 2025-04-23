@@ -9,6 +9,7 @@ I use Colemak-DH ISO layout for the base layer, and with the extra ISO-key next 
 The layers are designed to work with the machine set up to use the US international keymap. The reason for this, is that all OSes has this keymap, and it contains all special characters I need with the AltGr key. 
 
 ## Colemak
+
 This is the base layer, based on the Colemak Mod-DH ISO with the angle mod. 
 
 ## Lower 
@@ -17,9 +18,9 @@ The lower layer contains all special characters. In addition it changes the back
 
 ## Raise 
 
-The raise layer contains all the numbers, the F-keys, home/end, page up/down, insert, and printscreen (sysreq). 
+The raise layer contains all the numbers, the F-keys, home/end, page up/down, insert, and PrintScreen (sysreq). 
 
-It should be noted that the numbers are laid out according to Benford's law, assuming that with the exception of the first digit, which follow a logarithmic distribution, while all other digits are uniformly distrirbuted. The most used numbers are placed in the most comfortable finger positions. I addition, the numbers are split between odd numbers on the left hand and even numbers on the right hand. 
+It should be noted that the numbers are laid out according to Benford's law, assuming that with the exception of the first digit, which follow a logarithmic distribution, while all other digits are uniformly distributed. The most used numbers are placed in the most comfortable finger positions. I addition, the numbers are split between odd numbers on the left hand and even numbers on the right hand. 
 
 ## Adjust 
 
