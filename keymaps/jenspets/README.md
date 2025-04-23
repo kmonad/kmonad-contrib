@@ -52,6 +52,7 @@ There are still a few things that I want to see if I can implement in the keymap
 - Caps word: Pressing both shifts will capitalize the next word.
 - Mouse keys and movements.
 - Add the key nuhs to keymap. (Non-US Hash) Currently, only nubs (Non-US Backslash) seems to be defined in the source.
+- Layer for macros on the numpad.
 
 Some is only keymap tweask, but others might require a patch to KMonad.
 
