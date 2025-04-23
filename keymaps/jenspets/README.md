@@ -23,7 +23,7 @@ It should be noted that the numbers are laid out according to Benford's law, ass
 
 ## Adjust 
 
-The adjust layer has various adjustments. It is not used for this layout, as much of the adjustments are not needed or not available on the laptop keyboard. However, for other keyboards, I use this for controlling light effects, Bluetooth connections, solenoid settings, and so on. 
+The adjust layer has various adjustments. Most of the adjustments are not needed or not available on the laptop keyboard. However, for other keyboards, I use this for controlling light effects, Bluetooth connections, solenoid settings, and so on. 
 
 ## Audio
 
