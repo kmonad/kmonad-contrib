@@ -54,7 +54,7 @@
 	                  caps lmet  @tablwr spc @escrse rctl)
 
 (deflayer lower
-	  _    grv  @ [  ]  %  ^   & |  \  ~     _      _ _
+	  _    grv  @ {  }  %  ^   & |  \  ~     _      _ _
 	  _    esc  ! \( \) '  *   - =  \  |     _      _
 	  _    caps $ [  ]  " del # \_ +  nubs  S-nubs _
 	  _ _  @tglwr _ @tgadj _)
