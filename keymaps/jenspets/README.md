@@ -1,4 +1,4 @@
-# Keybard layout
+# Keyboard layout
 
 This keyboard layout is based on the same layout I use for other keyboards. It is based on a 34-key layout using several layers and homerow modifiers. 
 
