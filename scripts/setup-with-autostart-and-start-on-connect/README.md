@@ -102,3 +102,30 @@ udevadm info --query=all --name=/dev/input/event<CORRECT_ID>
 ```
 
 where `<CORRECT_ID>` is replaced by the correct event ID of the keyboard.
+
+## Configure KMonad
+
+In order to use KMonad a configuration file is required. Since KMonad
+configuration files list the device they apply to in them, a bit of trickery is
+required to be able to reuse the same configuration file for multiple
+keyboards.
+
+Consider this example configuration file that maps `esc` to `caps`:
+
+```kmonad
+;; $XDG_CONFIG_HOME/kmonad/universal.kbd
+(
+    defcfg
+    input  (device-file "$KMONAD_DEVICE")  ;;
+    output (uinput-sink "My KMonad output")
+    fallthrough true
+)
+(defsrc caps)
+(deflayer my-layer esc)
+```
+
+The configuration should be placed at `$XDG_CONFIG_HOME/kmonad/config.kbd`.
+
+The important part is how the device file is specified. Instead of hardcoding a
+device file, the environment variable `KMONAD_DEVICE` is used. This variable
+will be substituted with the correct device when KMonad is started.
