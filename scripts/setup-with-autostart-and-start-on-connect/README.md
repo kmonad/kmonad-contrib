@@ -10,7 +10,7 @@ This small guide will show how one can set up KMonad in a way that:
 The benefit of this setup is that now almost all configuration can be edited
 without root permissions. Furthermore, thanks to residing in $XDG_CONFIG_HOME,
 almost all configuration files can be managed using dotfiles managment systems,
-e.g. [chezmoi](http://ADD_LINK_HE.RE) so they become easily available on
+e.g. [chezmoi](https://www.chezmoi.io/) so they become easily available on
 multiple systems like a second tower PC.
 
 In order to achive this, this guide will show how to:
