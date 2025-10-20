@@ -61,7 +61,7 @@ However, to avoid that the following snippets might be helpful:
 
 ```bash
 sudo udevadm control --reload-rules
-# TODO: Add command to trigger udev rule here
+sudo udevadm trigger --name-match=uinput
 ```
 
 With that, everything is set up to allow normal users to run KMonad for their
@@ -91,9 +91,11 @@ SUBSYSTEM=="input", KERNEL=="event*", ATTRS{id/bustype}=="0005", \
       SYMLINK+="input/by-id/cherry-mx-bt-kbd"
 ```
 
-How to write udev rules is described [here](https://HOW_TO_WRITE_UDEV.RULES) in
-detail. As a small pointer, one needs to get the required information, e.g.
-vendor ID, product ID and bus ID, using the command
+How to write udev rules is described
+[here](https://michaelbergeron.com/blog/quick-guide-writing-udev-rules) and
+[here](https://wiki.archlinux.org/title/Udev) in detail. As a small pointer,
+one needs to get the required information, e.g. vendor ID, product ID and bus
+ID, using the command
 
 ```
 udevadm info --query=all --name=/dev/input/event<CORRECT_ID>
