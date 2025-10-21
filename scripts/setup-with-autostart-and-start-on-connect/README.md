@@ -202,8 +202,7 @@ having to resort to custom busy-waiting scripts.
 
 ### Enabling Systemd Units
 
-After creating the systemd unit files, they need to be enabled and started.
-This can be done using the commands:
+After creating the systemd unit files, enable and start them:
 
 ```bash
 systemctl --user enable --now kmonad-builtin.service
@@ -255,3 +254,92 @@ self-documenting names. Instead of seeing `kmonad-builtin.service` in the
 output of `systemctl --user list-units` and in the folder, one would see a
 rather cryptic device ID. Therefore, the author decided against this
 deduplication and chose to have separate unit files for each keyboard instead.
+
+
+## Verification and Troubleshooting
+
+This section describes how to verify that the setup works correctly and how to
+diagnose common issues.
+
+**Please reboot your system before proceeding to this section to ensure all
+changes take effect.** Some changes, especially group membership changes and
+udev rule changes, are ensured to take effect with a reboot.
+
+### Verifying the Setup
+
+After completing all setup steps and rebooting the system, ideally KMonad is running
+and your key remappings work. However, you wouldn't read this section if that was the
+case. Therefore, some verification steps can be used to verify that everything
+works correctly.
+
+First, check whether KMonad is running at all:
+
+```bash
+pgrep -a kmonad
+```
+
+If KMonad is not listed, it is not running at all. Then an easy way to check
+whether it could work at all is to start it manually:
+
+```bash
+export KMONAD_DEVICE=/dev/input/by-path/platform-i8042-serio-0-event-kbd
+kmonad <(envsubst < ~/.config/kmonad/universal.kbd)
+```
+
+If KMonad starts without errors, the configuration and permissions are set up
+correctly and the issue lies in the systemd setup. Otherwise there should be
+helpful error messages.
+
+Another way to troubleshoot the setup is to list all active systemd units. This
+should show the KMonad services and path units:
+
+```bash
+$ systemctl --user list-units | grep -i kmonad
+  kmonad-cherry-mx-bt.path      loaded active waiting   Watch for Cherry MX 3.0S BT Keyboard
+  kmonad-builtin.service        loaded active running   KMonad Service
+```
+
+Then, systemd can be asked about the status of its services. This works for
+services started by path units as well.
+
+```bash
+$ systemctl --user status kmonad-builtin.service
+● kmonad-builtin.service - KMonad Service
+     Loaded: loaded (/home/kmonaduser/.config/systemd/user/kmonad-builtin.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2025-10-21 13:46:48 CEST; 6h ago
+ Invocation: 517af78aecc94dbbb2d7e377db21059a
+   Main PID: 1512 (kmonad)
+      Tasks: 52 (limit: 37416)
+     Memory: 110.2M (peak: 112.3M)
+        CPU: 17.726s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/app.slice/kmonad-builtin.service
+             └─1512 kmonad /dev/fd/63
+
+Okt 21 13:46:48 notebook systemd[1503]: Started KMonad Service.
+```
+
+Of course, the status of the path unit could be checked as well:
+
+```bash
+$ systemctl --user status kmonad-cherry-mx-bt.path
+● kmonad-cherry-mx-bt.path - Watch for Cherry MX 3.0S BT Keyboard
+     Loaded: loaded (/home/kmonaduser/.config/systemd/user/kmonad-cherry-mx-bt.path; enabled; preset: enabled)
+     Active: active (waiting) since Tue 2025-10-21 13:46:48 CEST; 6h ago
+ Invocation: e5cf8f3a1ccc473cb37a6bdef39b0004
+   Triggers: ● kmonad-cherry-mx-bt.service
+       Docs: man:systemd.path(5)
+
+Okt 21 13:46:48 notebook systemd[1503]: Started Watch for Cherry MX 3.0S BT Keyboard.
+```
+
+Here, the status "Active: active (running)" indicates that the path unit is
+working correctly and monitors the device file.
+
+If the status of the service or path unit shows something suspicious, the full
+logs may reveal important information. They can be accessed using the following
+commands:
+
+```bash
+journalctl --user -u kmonad-builtin.service -f
+journalctl --user -u kmonad-cherry-mx-bt.path -f
+```
