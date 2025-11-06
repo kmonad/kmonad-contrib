@@ -1,0 +1,9 @@
+;; $XDG_CONFIG_HOME/kmonad/universal.kbd
+(
+    defcfg
+    input  (device-file "$KMONAD_DEVICE")  ;;
+    output (uinput-sink "My KMonad output")
+    fallthrough true
+)
+(defsrc caps)
+(deflayer my-layer esc)

@@ -1,0 +1,8 @@
+# udev rule for Bluetooth keyboard
+# Located at /lib/udev/rules.d/99-cherry-mx-bt.rules
+
+# these rules are specific for the keyboard at hand (vendor: 0687, product: 0004)
+SUBSYSTEM=="input", KERNEL=="event*", ATTRS{id/bustype}=="0005", \
+  ATTRS{id/vendor}=="0687", ATTRS{id/product}=="0004", \
+    ENV{ID_INPUT_KEYBOARD}=="1", \
+      SYMLINK+="input/by-id/cherry-mx-bt-kbd"

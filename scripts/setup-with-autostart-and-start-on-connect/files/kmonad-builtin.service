@@ -1,0 +1,17 @@
+# $XDG_CONFIG_HOME/systemd/user/kmonad-builtin.service
+[Unit]
+Description=KMonad Service
+After=network.target
+ConditionPathExists=/dev/input/by-path/platform-i8042-serio-0-event-kbd
+ConditionPathExists=%E/kmonad/universal.kbd
+
+[Service]
+Type=simple
+Environment=KMONAD_DEVICE=/dev/input/by-path/platform-i8042-serio-0-event-kbd
+# %E is expanded to $XDG_CONFIG_HOME by systemd
+ExecStart=/bin/bash -c 'kmonad <(envsubst < %E/kmonad/universal.kbd)'
+Restart=no
+RestartPreventExitStatus=1
+
+[Install]
+WantedBy=default.target

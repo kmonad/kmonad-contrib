@@ -1,0 +1,11 @@
+# $XDG_CONFIG_HOME/systemd/user/kmonad-cherry-mx-bt.path
+[Unit]
+Description=Watch for Cherry MX 3.0S BT Keyboard
+Documentation=man:systemd.path(5)
+
+[Path]
+PathExists=/dev/input/by-id/cherry-mx-bt-kbd
+Unit=kmonad-cherry-mx-bt.service
+
+[Install]
+WantedBy=default.target

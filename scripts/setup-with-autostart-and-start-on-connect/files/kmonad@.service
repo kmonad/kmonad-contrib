@@ -1,0 +1,16 @@
+# $XDG_CONFIG_HOME/systemd/user/kmonad@.service
+[Unit]
+Description=KMonad Service
+After=network.target
+ConditionPathExists=/dev/input/by-path/%i
+ConditionPathExists=%E/kmonad/universal.kbd
+
+[Service]
+Type=simple
+Environment=KMONAD_DEVICE=/dev/input/by-path/%i
+ExecStart=/bin/bash -c 'kmonad <(envsubst < %E/kmonad/universal.kbd)'
+Restart=no
+RestartPreventExitStatus=1
+
+[Install]
+WantedBy=default.target
