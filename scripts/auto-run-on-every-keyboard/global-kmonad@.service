@@ -6,3 +6,7 @@ DefaultDependencies=no
 Type=exec
 ExecStart=/usr/bin/kmonad -i 'device-file "%I"' %E/kmonad/personal.kbd
 Nice=-20
+DynamicUser=yes
+User=kmonad
+Group=kmonad
+SupplementaryGroups=input,uinput
